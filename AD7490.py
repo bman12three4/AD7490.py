@@ -20,19 +20,25 @@ class adc():
         # Use a clock speed of 3mhz, SPI mode 0, and most significant bit first.
         self.spi = FT232H.SPI(
             ft232h, cs=8, max_speed_hz=3000000, mode=0, bitorder=FT232H.MSBFIRST)
+		
+		self.power_mode = 3 	# set power mode to normal
+		self.dout = 0			# set DOUT to three state at end of transfer
+		self.range = 0			# set range to double Vref
+		self.coding = 1			# set coding to straight binary
+		self.seq = 0			# turn off sequencer
+		self.write = 1			# write command 
+		self.shadow = 0			# turn off sequencer
 
-        #Initialize ADC after  power up by sending ones for two cycles.
+        # Initialize ADC after  power up by sending ones for two cycles.
         self.spi.write([0xff, 0xff])
         self.spi.write([0xff, 0xff])
-
-        print("init complete")
 
 
 
     def readAll(self):
         return self.read(16)
 
-    def read(self, channels):
+    def readChannels(self, channels):
         values = range(channels)
         for x in values:
             values[x] = self.readChannel(x)
@@ -40,9 +46,9 @@ class adc():
         return values
 
     def readChannel(self, channel):
-        # data = 0b1000001100010000 #Basic data word, sets power functions to normal, goes to address 0, range is 2x
-        byte1 = 0b10000011 | (channel << 2)
-        byte2 = 0b00010000
+        #Basic data word, sets power functions to normal, goes to address 0, range is 2x
+        byte1 = 0x00 | (write << 7) | (seq << 6) | (channel << 2) | (self.power_mode)
+        byte2 = 0x00 | (shadow << 7) |(self.dout << 6) | (self.range << 5) | (self.coding << 4)
 
         self.spi.write([byte1, byte2])
 
@@ -50,3 +56,21 @@ class adc():
         response = struct.unpack('>H', ret)[0] & 4095
 
         return response
+		
+	def setSeq(self, mode):
+		self.seq = mode
+		
+	def setShadow(self, mode):
+		self.shadow = mode
+		
+	def setPowerMode(self, mode):
+		self.power_mode = mode
+		
+	def setDOUT(self, mode):
+		self.dout = mode
+		
+	def setRange(self, mode):
+		self.range = mode
+	
+	def setCoding(self, mode):
+		self.coding = mode

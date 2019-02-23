@@ -21,13 +21,13 @@ class adc():
         self.spi = FT232H.SPI(
             ft232h, cs=8, max_speed_hz=3000000, mode=0, bitorder=FT232H.MSBFIRST)
 		
-		self.power_mode = 3 	# set power mode to normal
-		self.dout = 0			# set DOUT to three state at end of transfer
-		self.range = 0			# set range to double Vref
-		self.coding = 1			# set coding to straight binary
-		self.seq = 0			# turn off sequencer
-		self.write = 1			# write command 
-		self.shadow = 0			# turn off sequencer
+	self.power_mode = 3 	# set power mode to normal
+	self.dout = 0			# set DOUT to three state at end of transfer
+	self.range = 0			# set range to double Vref
+	self.coding = 1			# set coding to straight binary
+	self.seq = 0			# turn off sequencer
+	self.write = 1			# write command 
+	self.shadow = 0			# turn off sequencer
 
         # Initialize ADC after  power up by sending ones for two cycles.
         self.spi.write([0xff, 0xff])
@@ -54,23 +54,23 @@ class adc():
 
         ret = self.spi.read(2)
         response = struct.unpack('>H', ret)[0] & 4095
-
+   
         return response
-		
-	def setSeq(self, mode):
-		self.seq = mode
-		
-	def setShadow(self, mode):
-		self.shadow = mode
-		
-	def setPowerMode(self, mode):
-		self.power_mode = mode
-		
-	def setDOUT(self, mode):
-		self.dout = mode
-		
-	def setRange(self, mode):
-		self.range = mode
-	
-	def setCoding(self, mode):
-		self.coding = mode
+
+    def setSeq(self, mode):
+        self.seq = mode
+
+    def setShadow(self, mode):
+        self.shadow = mode
+
+    def setPowerMode(self, mode):
+        self.power_mode = mode
+
+    def setDOUT(self, mode):
+    	self.dout = mode
+
+    def setRange(self, mode):
+    	self.range = mode
+
+    def setCoding(self, mode):
+    	self.coding = mode

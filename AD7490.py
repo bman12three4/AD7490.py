@@ -6,6 +6,12 @@ import struct
 
 class adc():
     def __init__(self):
+
+
+        '''This code is taken from the SPI example on Adafruit's Website
+           https://learn.adafruit.com/adafruit-ft232h-breakout/spi
+        '''
+
         # Temporarily disable FTDI serial drivers.
         FT232H.use_FT232H()
         # Find the first FT232H device.

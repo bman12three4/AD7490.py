@@ -1,5 +1,5 @@
 # AD7490.py
-Python driver for the Analog Devices AD7490 16 channel 12 bit ADC using the Adafruit FT232H breakout board.
+Python library for the Analog Devices AD7490 16 channel 12 bit ADC using the Adafruit FT232H breakout board.
 
 # How to install
 This code uses the Adafruit_GPIO library to comminicate with the FT232H. Download that [here](https://github.com/adafruit/Adafruit_Python_GPIO/archive/master.zip)

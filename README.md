@@ -8,3 +8,7 @@ Make sure you also install the appropriate drivers from FTDI which you can find 
 
 # How to use
 import the code with `import AD7490`, then create the object with `obj = AD7490.adc()`
+
+To read the value of an indivudial channel, use `obj.readChannel(n)`
+
+to read the value of multiple channels, use `obj.read(n)` to read from channel 0 to n, or `obj.readAll()` to read all 16 channels

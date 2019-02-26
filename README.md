@@ -12,3 +12,6 @@ import the code with `import AD7490`, then create the object with `obj = AD7490.
 To read the value of an indivudial channel, use `obj.readChannel(n)`
 
 to read the value of multiple channels, use `obj.read(n)` to read from channel 0 to n, or `obj.readAll()` to read all 16 channels
+
+
+if you are having problems then just grab the one from my GloveProject, it is an older one with less features but I am more confident that it works
